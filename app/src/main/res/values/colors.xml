@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!--Clean and Modern from http://blog.visme.co/website-color-schemes/-->
+    <color name="colorVeryDark">#17252A</color>
+    <color name="colorDark">#2B7A78</color>
+    <color name="colorMedium">#3AAFA9</color>
+    <color name="colorLight">#DEF2F1</color>
+    <color name="colorVeryLight">#FEFFFF</color>
 </resources>
