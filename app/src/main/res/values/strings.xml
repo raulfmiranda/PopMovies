@@ -7,4 +7,11 @@
     <string name="create_account">Create Account</string>
     <string name="already_member">Already a member? Login</string>
     <string name="no_account">No account yet? Create one</string>
+    <string name="erro_name_bad_format">Name with bad format</string>
+    <string name="erro_email_bad_format">E-mail with bad format</string>
+    <string name="erro_password_bad_format">Password with bad format</string>
+    <string name="success_authentication">Successful authentication</string>
+    <string name="erro_authentication">Authentication failed</string>
+    <string name="success_signup">Successful signup</string>
+    <string name="erro_signup">Signup failed</string>
 </resources>
