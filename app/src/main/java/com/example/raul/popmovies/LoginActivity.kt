@@ -1,5 +1,6 @@
 package com.example.raul.popmovies
 
+import android.content.Intent
 import android.graphics.Typeface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -17,8 +18,11 @@ class LoginActivity : AppCompatActivity() {
 
         // Trocando fonte do logotipo
         val typeFace:Typeface = Typeface.createFromAsset(assets, "fonts/true-crimes.ttf")
-        tv_logo.typeface = typeFace
+        tv_logo_signup.typeface = typeFace
 
-
+        link_signup.setOnClickListener {
+            var intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

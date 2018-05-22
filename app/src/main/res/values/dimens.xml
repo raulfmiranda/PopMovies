@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="tv_logo_height">48dp</dimen>
+    <dimen name="container_padding_top">56dp</dimen>
+    <dimen name="container_padding">24dp</dimen>
 </resources>
