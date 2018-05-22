@@ -17,6 +17,10 @@ class PresenterLogin(view: Login.View) : Login.Presenter {
             if (!senhaValida)
                 _view.erroSenhaFormatoIncorreto()
         } else {
+            var progressBar = _view.mostrarProgresso()
+            Thread.sleep(3000)
+            _view.esconderProgresso()
+
             if(email.toLowerCase() == "email@example.com" && senha == "1")
                 _view.autenticadoComSucesso()
             else

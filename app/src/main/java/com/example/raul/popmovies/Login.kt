@@ -1,5 +1,7 @@
 package com.example.raul.popmovies
 
+import android.widget.ProgressBar
+
 interface Login {
 
     interface View {
@@ -7,6 +9,8 @@ interface Login {
         fun erroSenhaFormatoIncorreto()
         fun autenticadoComSucesso()
         fun autenticacaoComFalha()
+        fun mostrarProgresso() //: ProgressBar
+        fun esconderProgresso()//(progressBar: ProgressBar)
     }
 
     interface Presenter {
