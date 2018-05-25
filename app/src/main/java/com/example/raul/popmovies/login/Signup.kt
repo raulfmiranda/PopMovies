@@ -8,8 +8,8 @@ interface Signup {
         fun erroSenhaFormatoIncorreto()
         fun cadastradoComSucesso(userId: String)
         fun cadastroComFalha(erroMsg:String)
-        fun mostrarProgresso() //: ProgressBar
-        fun esconderProgresso()//(progressBar: ProgressBar)
+        fun mostrarProgresso()
+        fun esconderProgresso()
     }
 
     interface Presenter {

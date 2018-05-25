@@ -6,6 +6,8 @@ import com.example.raul.popmovies.login.Signup
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
+//TODO: http://www.appsdeveloperblog.com/firebase-authentication-example-kotlin/
+
 class Firebase(presenterSignup: Signup.Presenter) : Login.Api {
 
     var auth = FirebaseAuth.getInstance()

@@ -54,26 +54,12 @@ class LoginActivity : AppCompatActivity(), Login.View {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
-    override fun mostrarProgresso() { //: ProgressBar {
+    override fun mostrarProgresso() {
         fl_progress.visibility = FrameLayout.VISIBLE
-        pb_login.visibility = ProgressBar.VISIBLE
-        //window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-//        var progressBar = ProgressBar(this, null, android.R.attr.progressBarStyleLarge)
-//        var params = RelativeLayout.LayoutParams(100, 100)
-//        params.addRule(RelativeLayout.CENTER_IN_PARENT)
-//        root_layout.addView(progressBar, params)
-//        progressBar.visibility = View.VISIBLE
-//        window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-//        return progressBar
     }
 
-    override fun esconderProgresso() {//(progressBar: ProgressBar) {
-        pb_login.visibility = ProgressBar.GONE
+    override fun esconderProgresso() {
         fl_progress.visibility = FrameLayout.GONE
-        //window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-
-//        progressBar.visibility = View.GONE
-//        window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
     }
 }
 
