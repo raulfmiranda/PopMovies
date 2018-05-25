@@ -156,5 +156,7 @@ fabric.properties
 .idea
 **/node_modules/*
 **/.firebaserc
+app/google-services.json
+google-services.json
 
 # End of https://www.gitignore.io/api/firebase
