@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorDark"
     android:id="@+id/root_layout"
-    tools:context=".LoginActivity">
+    tools:context=".login.LoginActivity">
 
     <TextView
         android:id="@+id/tv_logo_signup"
@@ -102,9 +102,28 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/til_password"
+        android:elevation="@dimen/elevation_progress"
+        app:layout_constraintBottom_toBottomOf="@+id/fl_progress"
+        app:layout_constraintEnd_toEndOf="@+id/fl_progress"
+        app:layout_constraintStart_toStartOf="@+id/fl_progress"
+        app:layout_constraintTop_toTopOf="@+id/fl_progress" />
+
+    <FrameLayout
+        android:id="@+id/fl_progress"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        android:elevation="@dimen/elevation_progress_frame"
+        android:background="@color/colorMedium"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>

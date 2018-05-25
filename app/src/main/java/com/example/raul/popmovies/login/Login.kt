@@ -1,4 +1,4 @@
-package com.example.raul.popmovies
+package com.example.raul.popmovies.login
 
 import android.widget.ProgressBar
 
@@ -14,6 +14,13 @@ interface Login {
     }
 
     interface Presenter {
-        fun logar(email:String, password:String)
+        fun logar(email:String, senha:String)
     }
+
+    interface Api {
+        fun signInWithEmailAndPassword(email:String, senha:String)
+        fun createUserWithEmailAndPassword(email:String, senha:String, nome:String)
+        fun signOut()
+    }
+
 }

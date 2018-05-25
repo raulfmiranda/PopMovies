@@ -1,6 +1,4 @@
-package com.example.raul.popmovies
-
-import android.view.View
+package com.example.raul.popmovies.login
 
 class PresenterLogin(view: Login.View) : Login.Presenter {
 
@@ -17,9 +15,8 @@ class PresenterLogin(view: Login.View) : Login.Presenter {
             if (!senhaValida)
                 _view.erroSenhaFormatoIncorreto()
         } else {
-            var progressBar = _view.mostrarProgresso()
-            Thread.sleep(3000)
-            _view.esconderProgresso()
+//            var progressBar = _view.mostrarProgresso()
+//            Handler().postDelayed({ _view.esconderProgresso() }, 3000)
 
             if(email.toLowerCase() == "email@example.com" && senha == "1")
                 _view.autenticadoComSucesso()

@@ -10,4 +10,10 @@
     <color name="colorMedium">#3AAFA9</color>
     <color name="colorLight">#DEF2F1</color>
     <color name="colorVeryLight">#FEFFFF</color>
+
+    <color name="colorVeryDarkTrans">#EE17252A</color>
+    <color name="colorDarkTrans">#EE2B7A78</color>
+    <color name="colorMediumTrans">#EE3AAFA9</color>
+    <color name="colorLightTrans">#EEDEF2F1</color>
+    <color name="colorVeryLightTrans">#EEFEFFFF</color>
 </resources>

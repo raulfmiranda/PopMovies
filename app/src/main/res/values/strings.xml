@@ -14,4 +14,5 @@
     <string name="erro_authentication">Authentication failed</string>
     <string name="success_signup">Successful signup</string>
     <string name="erro_signup">Signup failed</string>
+    <string name="tag">popmovies</string>
 </resources>

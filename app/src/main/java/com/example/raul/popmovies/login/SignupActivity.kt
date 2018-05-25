@@ -1,11 +1,12 @@
-package com.example.raul.popmovies
+package com.example.raul.popmovies.login
 
-import android.content.Intent
 import android.graphics.Typeface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.FrameLayout
 import android.widget.Toast
+import com.example.raul.popmovies.R
 import kotlinx.android.synthetic.main.activity_signup.*
 
 class SignupActivity : AppCompatActivity(), Signup.View {
@@ -32,26 +33,36 @@ class SignupActivity : AppCompatActivity(), Signup.View {
 
     override fun erroNomeFormatoIncorreto() {
         val msg = getString(R.string.erro_name_bad_format)
-        input_name.setError(msg)
+        input_name.error = msg
     }
 
     override fun erroEmailFormatoIncorreto() {
         val msg = getString(R.string.erro_email_bad_format)
-        input_email.setError(msg)
+        input_email.error = msg
     }
 
     override fun erroSenhaFormatoIncorreto() {
         val msg = getString(R.string.erro_password_bad_format)
-        input_password.setError(msg)
+        input_password.error = msg
     }
 
-    override fun cadastradoComSucesso() {
+    override fun cadastradoComSucesso(userId: String) {
         val msg = getString(R.string.success_signup)
         Log.d(TAG, msg)
+        Log.d(TAG, "UserId: $userId")
     }
 
-    override fun cadastroComFalha() {
+    override fun cadastroComFalha(erroMsg: String) {
         val msg = getString(R.string.erro_signup)
+        Log.d(TAG, "SignupActivity:cadastroComFalha: $erroMsg")
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun mostrarProgresso() {
+        fl_progress.visibility = FrameLayout.VISIBLE
+    }
+
+    override fun esconderProgresso() {
+        fl_progress.visibility = FrameLayout.GONE
     }
 }

@@ -3,4 +3,6 @@
     <dimen name="tv_logo_height">48dp</dimen>
     <dimen name="container_padding_top">56dp</dimen>
     <dimen name="container_padding">24dp</dimen>
+    <dimen name="elevation_progress">4dp</dimen>
+    <dimen name="elevation_progress_frame">2dp</dimen>
 </resources>

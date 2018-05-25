@@ -1,8 +1,12 @@
-package com.example.raul.popmovies
+package com.example.raul.popmovies.login
+
+import android.os.Handler
+import com.example.raul.popmovies.Firebase
 
 class PresenterSignup(view : Signup.View) : Signup.Presenter {
 
     val _view = view
+    val authApi = Firebase(this)
 
     override fun cadastrar(nome: String, email: String, senha: String) {
 
@@ -22,11 +26,17 @@ class PresenterSignup(view : Signup.View) : Signup.Presenter {
                 _view.erroSenhaFormatoIncorreto()
 
         } else {
-
-            if(true) //TODO: Criação de conta com FireBase
-                _view.cadastradoComSucesso()
-            else
-                _view.cadastroComFalha()
+            _view.mostrarProgresso()
+            authApi.createUserWithEmailAndPassword(email, senha, nome)
+            Handler().postDelayed({ _view.esconderProgresso() }, 3000)
         }
+    }
+
+    override fun cadastradoComSucesso(userId: String) {
+        _view.cadastradoComSucesso(userId)
+    }
+
+    override fun cadastroComFalha(erroMsg: String) {
+        _view.cadastroComFalha(erroMsg)
     }
 }

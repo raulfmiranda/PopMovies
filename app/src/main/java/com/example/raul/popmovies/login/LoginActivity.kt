@@ -1,15 +1,14 @@
-package com.example.raul.popmovies
+package com.example.raul.popmovies.login
 
 import android.content.Intent
 import android.graphics.Typeface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.view.WindowManager
+import android.widget.FrameLayout
 import android.widget.ProgressBar
-import android.widget.RelativeLayout
 import android.widget.Toast
+import com.example.raul.popmovies.R
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), Login.View {
@@ -37,12 +36,12 @@ class LoginActivity : AppCompatActivity(), Login.View {
 
     override fun erroEmailFormatoIncorreto() {
         val msg = getString(R.string.erro_email_bad_format)
-        input_email.setError(msg)
+        input_email.error = msg
     }
 
     override fun erroSenhaFormatoIncorreto() {
         val msg = getString(R.string.erro_password_bad_format)
-        input_password.setError(msg)
+        input_password.error = msg
     }
 
     override fun autenticadoComSucesso() {
@@ -56,9 +55,9 @@ class LoginActivity : AppCompatActivity(), Login.View {
     }
 
     override fun mostrarProgresso() { //: ProgressBar {
+        fl_progress.visibility = FrameLayout.VISIBLE
         pb_login.visibility = ProgressBar.VISIBLE
         //window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-
 //        var progressBar = ProgressBar(this, null, android.R.attr.progressBarStyleLarge)
 //        var params = RelativeLayout.LayoutParams(100, 100)
 //        params.addRule(RelativeLayout.CENTER_IN_PARENT)
@@ -70,6 +69,7 @@ class LoginActivity : AppCompatActivity(), Login.View {
 
     override fun esconderProgresso() {//(progressBar: ProgressBar) {
         pb_login.visibility = ProgressBar.GONE
+        fl_progress.visibility = FrameLayout.GONE
         //window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
 
 //        progressBar.visibility = View.GONE
