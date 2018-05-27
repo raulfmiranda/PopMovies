@@ -15,4 +15,7 @@
     <string name="success_signup">Successful signup</string>
     <string name="erro_signup">Signup failed</string>
     <string name="tag">popmovies</string>
+    <string name="title_main_activity">Movies List</string>
+    <string name="favorites">Favorites</string>
+    <string name="most_popular">Most Popular</string>
 </resources>
