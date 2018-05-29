@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
                     toolbar_main.title = getString(R.string.title_main_activity)
                 }
             }
+            MoviesApi.getMostPopMovies()
             return@setOnNavigationItemSelectedListener true
         }
     }
