@@ -8,6 +8,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 //TODO: http://www.appsdeveloperblog.com/firebase-authentication-example-kotlin/
 
+// COMO DESACOPLAR (TIRAR DEPENDÊNCIA) DA CLASSE FIREBASE DO PRESENTER????????
 class Firebase(presenterSignup: Signup.Presenter) : Login.Api {
 
     var auth = FirebaseAuth.getInstance()

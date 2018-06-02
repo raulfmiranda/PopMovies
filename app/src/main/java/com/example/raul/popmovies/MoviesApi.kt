@@ -20,29 +20,14 @@ class MoviesApi {
 //        private val params = "&language=pt-BR&page=1"
         private val TAG = "popmovies"
 
-        fun getMostPopMovies(recyclerView: RecyclerView) {
+        fun getMostPopMovies(callback: Callback<MovieResult?>) {
             // https://api.themoviedb.org/3/movie/popular?api_key=<<api_key>>&language=en-US&page=1
 //            val urlApi = "$baseUrl$mostPopMovies$apiKey$params"
 
             // TODO: https://medium.com/collabcode/consumindo-api-rest-no-android-com-retrofit-em-kotlin-parte-1-5e752ab8a877
             val call = RetrofitInitializer(baseUrl).moviesService().listMostPop(apiKey)
 
-            call.enqueue(object: Callback<MovieResult?> {
-                override fun onFailure(call: Call<MovieResult?>?, t: Throwable?) {
-                    Log.d(TAG, "getMostPopMovies erro: " + t?.message)
-                }
-
-                override fun onResponse(call: Call<MovieResult?>?, response: Response<MovieResult?>?) {
-                    response?.body()?.let {
-                        loadMostPopMovieOnRecyclerView(recyclerView)
-                        movieResult = it
-                    }
-                }
-            })
-        }
-
-        fun loadMostPopMovieOnRecyclerView(recyclerView: RecyclerView) {
-            recyclerView.adapter = MovieResultAdapter(movieResult)
+            call.enqueue(callback)
         }
     }
 }

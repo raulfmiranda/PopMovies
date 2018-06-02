@@ -8,7 +8,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.raul.popmovies.model.MovieResult
 import kotlinx.android.synthetic.main.fragment_most_pop.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -25,7 +29,9 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  *
  */
-class MostPopFragment : Fragment() {
+class MostPopFragment : Fragment(), Callback<MovieResult?> {
+
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -38,8 +44,7 @@ class MostPopFragment : Fragment() {
 //            param2 = it.getString(ARG_PARAM2)
 //        }
 
-        recViewMostPop.layoutManager = LinearLayoutManager(activity)
-        MoviesApi.getMostPopMovies(recViewMostPop)
+        MoviesApi.getMostPopMovies(this@MostPopFragment)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -101,5 +106,16 @@ class MostPopFragment : Fragment() {
                         putString(ARG_PARAM2, param2)
                     }
                 }
+    }
+
+    override fun onFailure(call: Call<MovieResult?>?, t: Throwable?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onResponse(call: Call<MovieResult?>?, response: Response<MovieResult?>?) {
+        recViewMostPop.layoutManager = LinearLayoutManager(activity)
+        response?.body()?.let {
+            recViewMostPop.adapter = MovieResultAdapter(it)
+        }
     }
 }
