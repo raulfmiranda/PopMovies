@@ -1,10 +1,15 @@
 package com.example.raul.popmovies.login
 
 import android.os.Handler
+import com.example.raul.popmovies.Firebase
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
 
-class PresenterLogin(view: Login.View) : Login.Presenter {
+class PresenterLogin(view: Login.View) : Login.Presenter, OnCompleteListener<AuthResult> {
 
     val _view : Login.View = view
+    val authApi = Firebase(this@PresenterLogin)
 
     override fun logar(email: String, senha: String) {
         val emailValido =  !email.isNullOrBlank() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
@@ -18,13 +23,17 @@ class PresenterLogin(view: Login.View) : Login.Presenter {
                 _view.erroSenhaFormatoIncorreto()
         } else {
             var progressBar = _view.mostrarProgresso()
-            Handler().postDelayed({ _view.esconderProgresso() }, 3000)
-
-            if(email.toLowerCase() == "email@example.com" && senha == "1")
-                _view.autenticadoComSucesso()
-            else
-                _view.autenticacaoComFalha()
+            authApi.signInWithEmailAndPassword(email, senha)
         }
+    }
 
+    override fun onComplete(task: Task<AuthResult>) {
+        if(task.isSuccessful) {
+            _view.esconderProgresso()
+            _view.autenticadoComSucesso()
+        } else {
+            _view.esconderProgresso()
+            _view.autenticacaoComFalha(task.exception.toString())
+        }
     }
 }

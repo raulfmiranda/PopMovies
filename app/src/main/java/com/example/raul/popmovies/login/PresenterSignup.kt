@@ -1,12 +1,18 @@
 package com.example.raul.popmovies.login
 
 import android.os.Handler
+import android.util.Log
 import com.example.raul.popmovies.Firebase
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
 
-class PresenterSignup(view : Signup.View) : Signup.Presenter {
+class PresenterSignup(view : Signup.View) : Signup.Presenter, OnCompleteListener<AuthResult> {
 
     val _view = view
-    val authApi = Firebase(this)
+    val authApi = Firebase(this@PresenterSignup)
+    val TAG = "popmovies"
+    var nomeUsu = ""
 
     override fun cadastrar(nome: String, email: String, senha: String) {
 
@@ -27,8 +33,8 @@ class PresenterSignup(view : Signup.View) : Signup.Presenter {
 
         } else {
             _view.mostrarProgresso()
-            authApi.createUserWithEmailAndPassword(email, senha, nome)
-            Handler().postDelayed({ _view.esconderProgresso() }, 3000)
+            authApi.createUserWithEmailAndPassword(email, senha)
+            nomeUsu = nome
         }
     }
 
@@ -38,5 +44,22 @@ class PresenterSignup(view : Signup.View) : Signup.Presenter {
 
     override fun cadastroComFalha(erroMsg: String) {
         _view.cadastroComFalha(erroMsg)
+    }
+
+    override fun onComplete(task: Task<AuthResult>) {
+        if(task.isSuccessful) {
+
+            Log.d(TAG, "createUserWithEmailAndPassword:success")
+            val userId = authApi.auth.currentUser!!.uid
+            val user = authApi.dbUsers.child(userId)
+            user.child("nome").setValue(nomeUsu)
+            _view.esconderProgresso()
+            _view.cadastradoComSucesso(userId)
+
+        } else {
+            Log.d(TAG, "createUserWithEmailAndPassword:failure")
+            _view.esconderProgresso()
+            _view.cadastroComFalha(task.exception.toString())
+        }
     }
 }

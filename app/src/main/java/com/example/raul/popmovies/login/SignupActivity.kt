@@ -1,12 +1,17 @@
 package com.example.raul.popmovies.login
 
+import android.content.Intent
 import android.graphics.Typeface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.FrameLayout
 import android.widget.Toast
+import com.example.raul.popmovies.MainActivity
 import com.example.raul.popmovies.R
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
 import kotlinx.android.synthetic.main.activity_signup.*
 
 class SignupActivity : AppCompatActivity(), Signup.View {
@@ -50,12 +55,14 @@ class SignupActivity : AppCompatActivity(), Signup.View {
         val msg = getString(R.string.success_signup)
         Log.d(TAG, msg)
         Log.d(TAG, "UserId: $userId")
+        var intent = Intent(this@SignupActivity, MainActivity::class.java)
+        startActivity(intent)
     }
 
     override fun cadastroComFalha(erroMsg: String) {
         val msg = getString(R.string.erro_signup)
         Log.d(TAG, "SignupActivity:cadastroComFalha: $erroMsg")
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, msg + ": $erroMsg", Toast.LENGTH_SHORT).show()
     }
 
     override fun mostrarProgresso() {

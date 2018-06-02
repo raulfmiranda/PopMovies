@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
                     replaceFragment(FavoritesFragment(), R.id.frame_fragment)
                 }
                 else -> {
-                    toolbar_main.title = getString(R.string.title_main_activity)
+                    toolbar_main.title = getString(R.string.most_popular)
                 }
             }
             return@setOnNavigationItemSelectedListener true

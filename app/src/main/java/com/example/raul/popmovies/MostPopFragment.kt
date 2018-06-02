@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import com.example.raul.popmovies.model.MovieResult
 import kotlinx.android.synthetic.main.fragment_most_pop.*
 import retrofit2.Call
@@ -44,6 +45,7 @@ class MostPopFragment : Fragment(), Callback<MovieResult?> {
 //            param2 = it.getString(ARG_PARAM2)
 //        }
 
+//        fl_progress.visibility = FrameLayout.VISIBLE
         MoviesApi.getMostPopMovies(this@MostPopFragment)
     }
 
@@ -115,6 +117,7 @@ class MostPopFragment : Fragment(), Callback<MovieResult?> {
     override fun onResponse(call: Call<MovieResult?>?, response: Response<MovieResult?>?) {
         recViewMostPop.layoutManager = LinearLayoutManager(activity)
         response?.body()?.let {
+            fl_progress.visibility = FrameLayout.GONE
             recViewMostPop.adapter = MovieResultAdapter(it)
         }
     }

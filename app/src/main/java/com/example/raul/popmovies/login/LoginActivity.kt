@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.example.raul.popmovies.MainActivity
 import com.example.raul.popmovies.R
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -47,11 +48,13 @@ class LoginActivity : AppCompatActivity(), Login.View {
     override fun autenticadoComSucesso() {
         val msg = getString(R.string.success_authentication)
         Log.d(TAG, msg)
+        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        startActivity(intent)
     }
 
-    override fun autenticacaoComFalha() {
+    override fun autenticacaoComFalha(msgErro: String) {
         val msg = getString(R.string.erro_authentication)
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, msg + ": $msgErro", Toast.LENGTH_SHORT).show()
     }
 
     override fun mostrarProgresso() {

@@ -11,4 +11,19 @@
         android:id="@+id/recViewMostPop"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <FrameLayout
+        android:id="@+id/fl_progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:elevation="@dimen/elevation_progress_frame">
+
+        <ProgressBar
+            android:id="@+id/pb_frag_most_pop"
+            style="?android:attr/progressBarStyle"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
 </FrameLayout>
