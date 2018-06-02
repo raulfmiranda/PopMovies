@@ -4,9 +4,11 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.fragment_most_pop.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,10 +33,13 @@ class MostPopFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+//        arguments?.let {
+//            param1 = it.getString(ARG_PARAM1)
+//            param2 = it.getString(ARG_PARAM2)
+//        }
+
+        recViewMostPop.layoutManager = LinearLayoutManager(activity)
+        MoviesApi.getMostPopMovies(recViewMostPop)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
