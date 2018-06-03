@@ -4,13 +4,18 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.Toast
 import com.example.raul.popmovies.model.MovieResult
 import kotlinx.android.synthetic.main.fragment_most_pop.*
+import kotlinx.android.synthetic.main.fragment_most_pop.view.*
+import kotlinx.android.synthetic.main.list_item_movie.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,6 +56,7 @@ class MostPopFragment : Fragment(), Callback<MovieResult?> {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_most_pop, container, false)
     }
@@ -111,7 +117,8 @@ class MostPopFragment : Fragment(), Callback<MovieResult?> {
     }
 
     override fun onFailure(call: Call<MovieResult?>?, t: Throwable?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val erroMsg = t?.message.toString()
+        activity?.toast("Error: $erroMsg")
     }
 
     override fun onResponse(call: Call<MovieResult?>?, response: Response<MovieResult?>?) {
