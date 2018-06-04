@@ -3,6 +3,7 @@ package com.example.raul.popmovies
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Bundle
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -17,18 +18,30 @@ import kotlinx.android.synthetic.main.list_item_movie.*
 class MovieResultAdapter(val movieResult: MovieResult) : RecyclerView.Adapter<MovieResultAdapter.ViewHolder>() {
 
     private val movies = movieResult.results
+    private var context: Context? = null
 //    private val uriBase = "https://image.tmdb.org/t/p/w45"
     private val uriBase = "https://image.tmdb.org/t/p/w92"
 
     override fun getItemCount() = movies.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent?.context).inflate(R.layout.list_item_movie, parent, false))
+        context = parent?.context
+        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.list_item_movie, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder?.let {
-            it.txtMovieTitle?.text = movies[position].title
+
+            it.txtMovieTitle?.let {
+                it.text = movies[position].title
+                it.setOnClickListener {
+                    var bundle = Bundle()
+                    bundle.putSerializable(DetailFragment.EXTRA_DETAIL, movies[position])
+                    var fragment = DetailFragment()
+                    fragment.arguments = bundle
+                    (context as MainActivity).replaceFragment(fragment, R.id.frame_fragment)
+                }
+            }
 
             val uri = Uri.parse(uriBase + movies[position].poster_path)
             Picasso
