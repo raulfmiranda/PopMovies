@@ -57,16 +57,19 @@ class DetailFragment : Fragment() {
 
         movie?.let {
 
+            view.txtOverview.text = it.overview
+
             val uri = Uri.parse(uriBase + it.backdrop_path)
             Picasso
                     .get()
                     .load(uri.toString())
-                    .placeholder(R.drawable.ic_movies)
+                    .placeholder(R.drawable.no_movie_img)
+                    .fit().centerCrop()
                     .into(view.imgMovieDetail)
+
         }
         // Inflate the layout for this fragment
         return view
-//        return inflater.inflate(R.layout.fragment_detail, container, false)
     }
 
     // TODO: Rename method, update argument and hook method into UI event
