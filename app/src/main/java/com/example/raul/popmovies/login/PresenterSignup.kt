@@ -49,15 +49,14 @@ class PresenterSignup(view : Signup.View) : Signup.Presenter, OnCompleteListener
     override fun onComplete(task: Task<AuthResult>) {
         if(task.isSuccessful) {
 
-            Log.d(TAG, "createUserWithEmailAndPassword:success")
-            val userId = authApi.auth.currentUser!!.uid
-            val user = authApi.dbUsers.child(userId)
-            user.child("nome").setValue(nomeUsu)
-            _view.esconderProgresso()
-            _view.cadastradoComSucesso(userId)
+            authApi.auth.currentUser?.let {
+                val userId = it.uid
+                authApi.registerUserData(userId, nomeUsu)
+                _view.esconderProgresso()
+                _view.cadastradoComSucesso(userId)
+            }
 
         } else {
-            Log.d(TAG, "createUserWithEmailAndPassword:failure")
             _view.esconderProgresso()
             _view.cadastroComFalha(task.exception.toString())
         }

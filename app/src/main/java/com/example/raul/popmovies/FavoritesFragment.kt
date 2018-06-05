@@ -4,9 +4,17 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import com.example.raul.popmovies.model.Movie
+import com.example.raul.popmovies.model.MovieResult
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.fragment_favorites.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -23,8 +31,10 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  *
  */
-class FavoritesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+class FavoritesFragment : Fragment(), ValueEventListener {
+
+    private var movies: MutableList<Movie> = mutableListOf<Movie>()
+    private var firebase = Firebase(this@FavoritesFragment)
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
@@ -35,6 +45,9 @@ class FavoritesFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        // TODO: AQUIIIIIIIIIIIIIIIIIIIII!!!!!
+        firebase.getFavoriteMovies()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -96,5 +109,19 @@ class FavoritesFragment : Fragment() {
                         putString(ARG_PARAM2, param2)
                     }
                 }
+    }
+
+    override fun onCancelled(dbError: DatabaseError?) {
+        println("FavoritesFragment:onCancelled: ${dbError?.toException()}")
+    }
+
+    override fun onDataChange(data: DataSnapshot?) {
+        data?.children?.mapNotNullTo(movies) {
+            it.getValue<Movie>(Movie::class.java)
+        }
+        recFavorites.layoutManager = LinearLayoutManager(activity)
+        fl_progress.visibility = FrameLayout.GONE
+        var movieResult = MovieResult(1, movies.size, 1, movies)
+        recFavorites.adapter = MovieResultAdapter(movieResult)
     }
 }

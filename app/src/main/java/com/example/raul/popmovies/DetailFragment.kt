@@ -31,10 +31,10 @@ import javax.xml.transform.Result
  *
  */
 class DetailFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
     private var movie: Movie? = null
     private var listener: OnFragmentInteractionListener? = null
-
+    private var firebase = Firebase()
     private val uriBase = "https://image.tmdb.org/t/p/w780"
     //https://image.tmdb.org/t/p/w300/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg
 
@@ -58,6 +58,18 @@ class DetailFragment : Fragment() {
         movie?.let {
 
             view.txtOverview.text = it.overview
+
+            view.checkFavorite.setOnClickListener {
+                if(checkFavorite.isChecked) {
+                    val userId = firebase.auth.currentUser?.uid
+                    userId?.let {
+                        val uid = it
+                        movie?.let {
+                            firebase.registerFavoriteMovie(uid, it)
+                        }
+                    }
+                }
+            }
 
             val uri = Uri.parse(uriBase + it.backdrop_path)
             Picasso
