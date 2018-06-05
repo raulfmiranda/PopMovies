@@ -1,4 +1,4 @@
-package com.example.raul.popmovies
+package com.example.raul.popmovies.async
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

@@ -1,9 +1,8 @@
-package com.example.raul.popmovies
+package com.example.raul.popmovies.async
 
 import com.example.raul.popmovies.model.MovieResult
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 

@@ -1,9 +1,9 @@
 package com.example.raul.popmovies
 
-import android.app.Activity
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import android.support.v7.app.AppCompatActivity
+import com.example.raul.popmovies.fragments.FavoritesFragment
+import com.example.raul.popmovies.fragments.MostPopFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

@@ -1,7 +1,5 @@
 package com.example.raul.popmovies.login
 
-import android.widget.ProgressBar
-
 interface Login {
 
     interface View {

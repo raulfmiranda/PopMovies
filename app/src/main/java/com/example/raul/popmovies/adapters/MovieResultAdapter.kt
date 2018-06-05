@@ -1,19 +1,20 @@
-package com.example.raul.popmovies
+package com.example.raul.popmovies.adapters
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.raul.popmovies.MainActivity
+import com.example.raul.popmovies.R
+import com.example.raul.popmovies.fragments.DetailFragment
 import com.example.raul.popmovies.model.MovieResult
+import com.example.raul.popmovies.replaceFragment
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.list_item_movie.*
 
 class MovieResultAdapter(val movieResult: MovieResult) : RecyclerView.Adapter<MovieResultAdapter.ViewHolder>() {
 
@@ -49,14 +50,6 @@ class MovieResultAdapter(val movieResult: MovieResult) : RecyclerView.Adapter<Mo
                     .load(uri.toString())
                     .placeholder(R.drawable.ic_movies)
                     .into(it.imgMovie)
-
-//            https://image.tmdb.org/t/p/w45/to0spRl1CMDvyUbOnbb4fTk3VAd.jpg
-//            val uri = Uri.parse(uriBase + movies[position].poster_path)
-////            val inputStream = context?.contentResolver?.openInputStream(uri)
-//            val context = it.txtMovieTitle?.context
-//            val inputStream = context?.contentResolver?.openInputStream(uri)
-//            val drawable = Drawable.createFromStream(inputStream, uri.toString())
-//            it.txtMovieTitle?.setCompoundDrawables(drawable, null, null, null)
         }
 
     }

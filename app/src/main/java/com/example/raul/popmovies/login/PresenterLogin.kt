@@ -1,7 +1,6 @@
 package com.example.raul.popmovies.login
 
-import android.os.Handler
-import com.example.raul.popmovies.Firebase
+import com.example.raul.popmovies.async.Firebase
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult

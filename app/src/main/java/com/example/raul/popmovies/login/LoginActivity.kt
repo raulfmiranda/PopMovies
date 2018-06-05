@@ -2,11 +2,10 @@ package com.example.raul.popmovies.login
 
 import android.content.Intent
 import android.graphics.Typeface
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.FrameLayout
-import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.raul.popmovies.MainActivity
 import com.example.raul.popmovies.R

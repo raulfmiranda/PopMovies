@@ -1,13 +1,9 @@
-package com.example.raul.popmovies
+package com.example.raul.popmovies.async
 
-import android.util.Log
-import com.example.raul.popmovies.login.Login
-import com.example.raul.popmovies.login.Signup
 import com.example.raul.popmovies.model.Movie
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
@@ -48,12 +44,20 @@ class Firebase constructor() {
         userData.child("nome").setValue(nome)
     }
 
-    fun registerFavoriteMovie(userId: String, movie: Movie) {
+    fun registerFavoriteMovie(movie: Movie) {
+        val userId = auth.currentUser?.uid
         val userFavorites = dbFavorites.child(userId).child(movie.id.toString())
         userFavorites.setValue(movie)
     }
 
-    fun getFavoriteMovies(userId: String) {
+    fun removeFavoriteMovie(movieId: String) {
+        val userId = auth.currentUser?.uid
+        val userFavMovie = dbFavorites.child(userId).child(movieId)
+        userFavMovie.removeValue()
+    }
+
+    fun getFavoriteMovies() {
+        val userId = auth.currentUser?.uid
         dbFavorites.child(userId).addListenerForSingleValueEvent(listenerValueEvent)
     }
 
