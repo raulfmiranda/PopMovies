@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.raul.popmovies.MainActivity
@@ -36,12 +37,12 @@ class MovieResultAdapter(val movieResult: MovieResult) : RecyclerView.Adapter<Mo
             it.txtMovieTitle?.let {
                 it.text = movies[position].title
                 it.setOnClickListener {
-                    var bundle = Bundle()
-                    bundle.putSerializable(DetailFragment.EXTRA_DETAIL, movies[position])
-                    var fragment = DetailFragment()
-                    fragment.arguments = bundle
-                    (context as MainActivity).replaceFragment(fragment, R.id.frame_fragment)
+                    goToDetailFragment(position)
                 }
+            }
+
+            it.imgEye?.setOnClickListener {
+                goToDetailFragment(position)
             }
 
             val uri = Uri.parse(uriBase + movies[position].poster_path)
@@ -51,15 +52,24 @@ class MovieResultAdapter(val movieResult: MovieResult) : RecyclerView.Adapter<Mo
                     .placeholder(R.drawable.ic_movies)
                     .into(it.imgMovie)
         }
+    }
 
+    fun goToDetailFragment(position: Int) {
+        var bundle = Bundle()
+        bundle.putSerializable(DetailFragment.EXTRA_DETAIL, movies[position])
+        var fragment = DetailFragment()
+        fragment.arguments = bundle
+        (context as MainActivity).replaceFragment(fragment, R.id.frame_fragment)
     }
 
     class ViewHolder(itemView: View?): RecyclerView.ViewHolder(itemView) {
         var txtMovieTitle: TextView? = null
         var imgMovie: ImageView? = null
+        var imgEye: ImageButton? = null
         init {
             txtMovieTitle = itemView?.findViewById(R.id.txtMovieTitle)
             imgMovie = itemView?.findViewById(R.id.imgMovie)
+            imgEye = itemView?.findViewById(R.id.imgEye)
         }
     }
 }

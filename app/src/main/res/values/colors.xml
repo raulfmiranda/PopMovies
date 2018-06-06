@@ -17,4 +17,5 @@
     <color name="colorLightTrans">#EEDEF2F1</color>
     <color name="colorVeryLightTrans">#EEFEFFFF</color>
     <color name="yellow">#FFFF00</color>
+    <color name="transparent">#0017252A</color>
 </resources>

@@ -32,4 +32,8 @@ class MainActivity : AppCompatActivity() {
             return@setOnNavigationItemSelectedListener true
         }
     }
+
+    override fun onBackPressed() {
+        moveTaskToBack(true)
+    }
 }

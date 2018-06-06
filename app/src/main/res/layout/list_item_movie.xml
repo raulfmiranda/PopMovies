@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/row_movie"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -12,10 +13,10 @@
         android:id="@+id/cardMovie"
         android:layout_width="match_parent"
         android:layout_gravity="center"
-        android:padding="@dimen/container_padding_small"
         android:layout_height="70dp" >
 
         <android.support.constraint.ConstraintLayout
+            android:background="@drawable/card_rounded_rectangle"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -25,7 +26,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="@dimen/margin_small"
-                android:layout_marginStart="64dp"
                 android:gravity="center_vertical"
                 android:text="Movie Title"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -35,11 +35,24 @@
             <ImageView
                 android:id="@+id/imgMovie"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/imgEye"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/eye_24dp" />
 
         </android.support.constraint.ConstraintLayout>
 
