@@ -5,10 +5,10 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 
-class PresenterSignup(view : Signup.View) : Signup.Presenter, OnCompleteListener<AuthResult> {
+class SignupPresenter(view : Signup.View) : Signup.Presenter, OnCompleteListener<AuthResult> {
 
     val _view = view
-    val authApi = Firebase(this@PresenterSignup)
+    val authApi = Firebase(this@SignupPresenter)
     val TAG = "popmovies"
     var nomeUsu = ""
 

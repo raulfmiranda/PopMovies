@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_signup.*
 
 class SignupActivity : AppCompatActivity(), Signup.View {
 
-    val presenter : Signup.Presenter = PresenterSignup(this)
+    val presenter : Signup.Presenter = SignupPresenter(this)
     val TAG : String = "popmovies"
 
     override fun onCreate(savedInstanceState: Bundle?) {

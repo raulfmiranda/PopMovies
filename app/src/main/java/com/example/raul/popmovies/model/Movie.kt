@@ -1,20 +1,28 @@
 package com.example.raul.popmovies.model
 
+import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
+import android.arch.persistence.room.Ignore
 import java.io.Serializable
 
+@Entity(tableName = "movie")
 data class Movie(
-        var vote_count: Int = 0,
-        var id: Int = 0,
-        var video: Boolean = false,
-        var vote_average: Double = 0.0,
-        var title: String = "",
-        var popularity: Double = 0.0,
-        var poster_path: String = "",
-        var original_language: String = "",
-        var original_title: String = "",
-        var genre_ids: List<Int> = mutableListOf<Int>(),
-        var backdrop_path: String = "",
-        var adult: Boolean = false,
-        var overview: String = "",
-        var release_date: String = ""
+        @ColumnInfo(name = "vote_count") var vote_count: Int = 0,
+        @PrimaryKey(autoGenerate = false) var id: Int = 0,
+        @ColumnInfo(name = "video") var video: Boolean = false,
+        @ColumnInfo(name = "vote_average") var vote_average: Double = 0.0,
+        @ColumnInfo(name = "title") var title: String = "",
+        @ColumnInfo(name = "popularity") var popularity: Double = 0.0,
+        @ColumnInfo(name = "poster_path") var poster_path: String = "",
+        @ColumnInfo(name = "original_language") var original_language: String = "",
+        @ColumnInfo(name = "original_title") var original_title: String = "",
+        @Ignore var genre_ids: List<Int> = mutableListOf<Int>(),
+        @ColumnInfo(name = "backdrop_path") var backdrop_path: String = "",
+        @ColumnInfo(name = "adult") var adult: Boolean = false,
+        @ColumnInfo(name = "overview") var overview: String = "",
+        @ColumnInfo(name = "release_date") var release_date: String = ""
 ): Serializable
+
+// @ColumnInfo(name = "is_favorite") var is_favorite: Boolean = false
+// error: Cannot find setter for field. private boolean is_favorite;

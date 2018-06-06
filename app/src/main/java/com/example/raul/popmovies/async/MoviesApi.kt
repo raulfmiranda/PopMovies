@@ -13,7 +13,7 @@ class MoviesApi {
         // apikey em C:\Users\{UserName}\.gradle\gradle.properties
         private val apiKey = BuildConfig.TheMoviedbApiKey
         private val baseUrl = "https://api.themoviedb.org/"
-        private var movieResult: MovieResult = MovieResult(1, 0, 0, listOf<Movie>())
+        private var movieResult: MovieResult = MovieResult(1, 0, 0, mutableListOf<Movie>())
 //        private val mostPopMovies = "3/movie/popular?api_key="
 //        private val params = "&language=pt-BR&page=1"
         private val TAG = "popmovies"

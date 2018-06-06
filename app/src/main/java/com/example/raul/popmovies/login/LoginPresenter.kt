@@ -5,10 +5,10 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 
-class PresenterLogin(view: Login.View) : Login.Presenter, OnCompleteListener<AuthResult> {
+class LoginPresenter(view: Login.View) : Login.Presenter, OnCompleteListener<AuthResult> {
 
     val _view : Login.View = view
-    val authApi = Firebase(this@PresenterLogin)
+    val authApi = Firebase(this@LoginPresenter)
 
     override fun logar(email: String, senha: String) {
         val emailValido =  !email.isNullOrBlank() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()

@@ -47,7 +47,7 @@ class FavoritesFragment : Fragment(), ValueEventListener {
             recFavorites.layoutManager = LinearLayoutManager(activity)
             fl_progress.visibility = FrameLayout.GONE
             var movieResult = MovieResult(1, movies.size, 1, movies)
-            recFavorites.adapter = MovieResultAdapter(movieResult)
+            recFavorites.adapter = MovieResultAdapter(movieResult.results)
         }
     }
 }

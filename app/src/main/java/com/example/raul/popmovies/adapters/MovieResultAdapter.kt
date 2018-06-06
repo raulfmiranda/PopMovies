@@ -13,13 +13,13 @@ import android.widget.TextView
 import com.example.raul.popmovies.MainActivity
 import com.example.raul.popmovies.R
 import com.example.raul.popmovies.fragments.DetailFragment
-import com.example.raul.popmovies.model.MovieResult
+import com.example.raul.popmovies.model.Movie
 import com.example.raul.popmovies.replaceFragment
 import com.squareup.picasso.Picasso
 
-class MovieResultAdapter(val movieResult: MovieResult) : RecyclerView.Adapter<MovieResultAdapter.ViewHolder>() {
+class MovieResultAdapter(val _movies: MutableList<Movie>) : RecyclerView.Adapter<MovieResultAdapter.ViewHolder>() {
 
-    private val movies = movieResult.results
+    private val movies = _movies
     private var context: Context? = null
 //    private val uriBase = "https://image.tmdb.org/t/p/w45"
     private val uriBase = "https://image.tmdb.org/t/p/w92"
