@@ -10,11 +10,12 @@ import com.google.gson.Gson
 
 class RetrofitInitializer(baseUrl: String) {
 
-    private val GSON = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
+//    private val GSON = GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
 
     private val retrofit = Retrofit.Builder()
                                 .baseUrl(baseUrl)
-                                .addConverterFactory(GsonConverterFactory.create(GSON))
+//                                .addConverterFactory(GsonConverterFactory.create(GSON))
+                                .addConverterFactory(GsonConverterFactory.create())
                                 .build()
 
     fun moviesService() = retrofit.create(MoviesService::class.java)

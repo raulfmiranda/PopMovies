@@ -24,7 +24,7 @@ data class Movie(
         @ColumnInfo(name = "adult") var adult: Boolean = false,
         @ColumnInfo(name = "overview") var overview: String = "",
         @ColumnInfo(name = "release_date") var release_date: String = "",
-        @ColumnInfo(name = "favorite") @Expose(serialize = false, deserialize = false) var favorite: Boolean = false
+        @ColumnInfo(name = "favorite") var favorite: Boolean = false
 ): Serializable
 
 // @ColumnInfo(name = "is_favorite") var is_favorite: Boolean = false

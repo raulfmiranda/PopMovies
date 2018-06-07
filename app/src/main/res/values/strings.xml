@@ -18,4 +18,8 @@
     <string name="title_main_activity">Movies List</string>
     <string name="favorites">Favorites</string>
     <string name="most_popular">Popular Movies</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="close_app">Close PopMovies App</string>
+    <string name="close_app_ask">Do you want to close the app?</string>
 </resources>

@@ -15,6 +15,7 @@ import com.example.raul.popmovies.adapters.MovieResultAdapter
 import com.example.raul.popmovies.async.MoviesApi
 import com.example.raul.popmovies.R
 import com.example.raul.popmovies.async.DbWorkerThread
+import com.example.raul.popmovies.dao.MovieDaoHelper
 import com.example.raul.popmovies.dao.MovieDatabase
 import com.example.raul.popmovies.model.Movie
 import com.example.raul.popmovies.model.MovieResult
@@ -26,17 +27,15 @@ import retrofit2.Response
 
 class MostPopFragment : Fragment(), Callback<MovieResult?> {
 
-    private var mDb: MovieDatabase? = null
-    private var mDbWorkerThread: DbWorkerThread? = null
     private val mUiHandler = Handler()
+    private var movieDaoHelper: MovieDaoHelper? = null
 //    private val TAG = this.javaClass.name
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         (activity as MainActivity)?.let {
-            mDb = it.mDb
-            mDbWorkerThread = it.mDbWorkerThread
+            movieDaoHelper = it.movieDaoHelper
         }
     }
 
@@ -55,10 +54,10 @@ class MostPopFragment : Fragment(), Callback<MovieResult?> {
 
         val task = Runnable {
 
-            val movies = mDb?.movieDao()?.getAll()
-            val isDbEmpty = movies == null || movies.size == 0
+            val movies = movieDaoHelper?.getAll()
             mUiHandler.post({
-                if (isDbEmpty) {
+
+                if (movies == null || movies?.size == 0) {
                     MoviesApi.getMostPopMovies(this@MostPopFragment)
                 }
                 else {
@@ -68,12 +67,7 @@ class MostPopFragment : Fragment(), Callback<MovieResult?> {
                 }
             })
         }
-        mDbWorkerThread?.postTask(task)
-    }
-
-    private fun insertMoviesInDb(movie: Movie) {
-        val task = Runnable { mDb?.movieDao()?.insert(movie) }
-        mDbWorkerThread?.postTask(task)
+        movieDaoHelper?.postTask(task)
     }
 
     private fun bindDataWithUi(movies: MutableList<Movie>) {
@@ -81,18 +75,6 @@ class MostPopFragment : Fragment(), Callback<MovieResult?> {
         fl_progress.visibility = FrameLayout.GONE
         recViewMostPop.layoutManager = LinearLayoutManager(activity)
         recViewMostPop.adapter = MovieResultAdapter(movies)
-    }
-
-    private fun syncDb(movies: MutableList<Movie>) {
-        deleteAllDb()
-        for(movie in movies) {
-            insertMoviesInDb(movie)
-        }
-    }
-
-    private fun deleteAllDb() {
-        val task = Runnable { mDb?.movieDao()?.deleteAll() }
-        mDbWorkerThread?.postTask(task)
     }
 
     override fun onFailure(call: Call<MovieResult?>?, t: Throwable?) {
@@ -103,7 +85,7 @@ class MostPopFragment : Fragment(), Callback<MovieResult?> {
     override fun onResponse(call: Call<MovieResult?>?, response: Response<MovieResult?>?) {
         response?.body()?.results?.let {
             bindDataWithUi(it)
-            syncDb(it)
+            movieDaoHelper?.syncDb(it)
         }
     }
 }
