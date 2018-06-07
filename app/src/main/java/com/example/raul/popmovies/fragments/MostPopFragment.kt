@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import com.example.raul.popmovies.MainActivity
 import com.example.raul.popmovies.adapters.MovieResultAdapter
 import com.example.raul.popmovies.async.MoviesApi
 import com.example.raul.popmovies.R
@@ -26,19 +28,15 @@ class MostPopFragment : Fragment(), Callback<MovieResult?> {
 
     private var mDb: MovieDatabase? = null
     private var mDbWorkerThread: DbWorkerThread? = null
-//    private lateinit var mDbWorkerThread: DbWorkerThread
     private val mUiHandler = Handler()
+//    private val TAG = this.javaClass.name
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        activity?.let {
-            mDb = MovieDatabase.getInstance(it)
-            mDbWorkerThread = DbWorkerThread("dbWorkerThread")
-
-            mDbWorkerThread?.let {
-                it.start()
-            }
+        (activity as MainActivity)?.let {
+            mDb = it.mDb
+            mDbWorkerThread = it.mDbWorkerThread
         }
     }
 
@@ -49,15 +47,8 @@ class MostPopFragment : Fragment(), Callback<MovieResult?> {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
         fetchMoviesFromDb()
-    }
-
-    override fun onDestroy() {
-        MovieDatabase.destroyInstance()
-        mDbWorkerThread?.quit()
-        super.onDestroy()
+        super.onActivityCreated(savedInstanceState)
     }
 
     private fun fetchMoviesFromDb() {

@@ -4,6 +4,8 @@ import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import android.arch.persistence.room.Ignore
+import android.support.annotation.NonNull
+import com.google.gson.annotations.Expose
 import java.io.Serializable
 
 @Entity(tableName = "movie")
@@ -21,8 +23,11 @@ data class Movie(
         @ColumnInfo(name = "backdrop_path") var backdrop_path: String = "",
         @ColumnInfo(name = "adult") var adult: Boolean = false,
         @ColumnInfo(name = "overview") var overview: String = "",
-        @ColumnInfo(name = "release_date") var release_date: String = ""
+        @ColumnInfo(name = "release_date") var release_date: String = "",
+        @ColumnInfo(name = "favorite") @Expose(serialize = false, deserialize = false) var favorite: Boolean = false
 ): Serializable
 
 // @ColumnInfo(name = "is_favorite") var is_favorite: Boolean = false
 // error: Cannot find setter for field. private boolean is_favorite;
+// Room não deixa criar propriedades com o nome começando com IS
+// @NonNull from: import android.support.annotation.NonNull
