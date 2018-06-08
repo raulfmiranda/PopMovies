@@ -12,12 +12,9 @@
 * Quando quiser, a pessoa usuária poderá consultar novamente a lista de filmes ou a lista de seus filmes favoritos.
 * A pessoa usuária também pode ver em uma outra tela somente a lista de filmes que ele marcou como favoritos.
 
-### Observações:
-
-Foi utilizado:
+### Foi utilizado:
 
 ```
 * Firebase para login e persistência de dados.
 * SQLite + Room (ORM) para fazer cache local dos dados. 
-
 ```
