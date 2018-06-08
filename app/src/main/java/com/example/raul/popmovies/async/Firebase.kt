@@ -46,19 +46,27 @@ class Firebase constructor() {
 
     fun registerFavoriteMovie(movie: Movie) {
         val userId = auth.currentUser?.uid
-        val userFavorites = dbFavorites.child(userId).child(movie.id.toString())
-        userFavorites.setValue(movie)
+        userId?.let { uid ->
+            val userFavorites = dbFavorites.child(uid).child(movie.id.toString())
+            userFavorites.setValue(movie)
+        }
     }
 
     fun removeFavoriteMovie(movieId: String) {
         val userId = auth.currentUser?.uid
-        val userFavMovie = dbFavorites.child(userId).child(movieId)
-        userFavMovie.removeValue()
+        userId?.let { uid ->
+            val userFavMovie = dbFavorites.child(uid).child(movieId)
+            userFavMovie.removeValue()
+        }
     }
 
     fun getFavoriteMovies() {
         val userId = auth.currentUser?.uid
-        dbFavorites.child(userId).addListenerForSingleValueEvent(listenerValueEvent)
+        userId?.let { uid ->
+            listenerValueEvent?.let { lValEvent ->
+                dbFavorites.child(uid).addListenerForSingleValueEvent(lValEvent)
+            }
+        }
     }
 
     fun signOut() {

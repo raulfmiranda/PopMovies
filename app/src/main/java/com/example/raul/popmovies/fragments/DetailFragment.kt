@@ -4,6 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.Toolbar
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,6 +45,7 @@ class DetailFragment : Fragment(), ValueEventListener {
         movie?.let {
 
             view.txtOverview.text = it.overview
+            view.txtOverview.movementMethod = ScrollingMovementMethod()
 
             view.checkFavorite.setOnClickListener {
                 movie?.let {
@@ -69,17 +71,30 @@ class DetailFragment : Fragment(), ValueEventListener {
         return view
     }
 
-    override fun onCancelled(dbError: DatabaseError?) {
-        println("FavoritesFragment:onCancelled: ${dbError?.toException()}")
+//    override fun onCancelled(dbError: DatabaseError?) {
+//        println("FavoritesFragment:onCancelled: ${dbError?.toException()}")
+//    }
+//
+//    override fun onDataChange(data: DataSnapshot?) {
+//        var movieIDs = mutableListOf<Int>()
+//        data?.let {
+//            for(child in it.children) {
+//                var m = child.getValue(Movie::class.java)
+//                movieIDs.add(m!!.id)
+//            }
+//        }
+//        checkFavorite.isChecked = movieIDs.contains(movie!!.id)
+//    }
+
+    override fun onCancelled(dbError: DatabaseError) {
+        println("FavoritesFragment:onCancelled: ${dbError.toException()}")
     }
 
-    override fun onDataChange(data: DataSnapshot?) {
+    override fun onDataChange(data: DataSnapshot) {
         var movieIDs = mutableListOf<Int>()
-        data?.let {
-            for(child in it.children) {
-                var m = child.getValue(Movie::class.java)
-                movieIDs.add(m!!.id)
-            }
+        for(child in data.children) {
+            var m = child.getValue(Movie::class.java)
+            movieIDs.add(m!!.id)
         }
         checkFavorite.isChecked = movieIDs.contains(movie!!.id)
     }

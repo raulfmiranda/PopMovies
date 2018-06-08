@@ -22,7 +22,8 @@ class MovieResultAdapter(val _movies: MutableList<Movie>) : RecyclerView.Adapter
     private val movies = _movies
     private var context: Context? = null
 //    private val uriBase = "https://image.tmdb.org/t/p/w45"
-    private val uriBase = "https://image.tmdb.org/t/p/w92"
+//    private val uriBase = "https://image.tmdb.org/t/p/w92"
+    private val uriBase = "https://image.tmdb.org/t/p/w780"
 
     override fun getItemCount() = movies.size
 
@@ -41,16 +42,19 @@ class MovieResultAdapter(val _movies: MutableList<Movie>) : RecyclerView.Adapter
                 }
             }
 
-            it.imgEye?.setOnClickListener {
+            it.imgMovie?.setOnClickListener {
                 goToDetailFragment(position)
             }
 
-            val uri = Uri.parse(uriBase + movies[position].poster_path)
+            val uri = Uri.parse(uriBase + movies[position].backdrop_path)
+//            val uri = Uri.parse(uriBase + movies[position].poster_path)
             Picasso
                     .get()
                     .load(uri.toString())
                     .placeholder(R.drawable.ic_movies)
                     .into(it.imgMovie)
+
+
         }
     }
 
@@ -65,11 +69,9 @@ class MovieResultAdapter(val _movies: MutableList<Movie>) : RecyclerView.Adapter
     class ViewHolder(itemView: View?): RecyclerView.ViewHolder(itemView) {
         var txtMovieTitle: TextView? = null
         var imgMovie: ImageView? = null
-        var imgEye: ImageButton? = null
         init {
             txtMovieTitle = itemView?.findViewById(R.id.txtMovieTitle)
             imgMovie = itemView?.findViewById(R.id.imgMovie)
-            imgEye = itemView?.findViewById(R.id.imgEye)
         }
     }
 }

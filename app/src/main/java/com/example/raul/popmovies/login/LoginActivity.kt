@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : AppCompatActivity(), Login.View {
 
     val presenter : Login.Presenter = LoginPresenter(this)
-    val TAG : String = "popmovies"
+    val TAG : String = this.javaClass.name
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

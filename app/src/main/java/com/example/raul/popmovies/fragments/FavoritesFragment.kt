@@ -33,21 +33,19 @@ class FavoritesFragment : Fragment(), ValueEventListener {
         return inflater.inflate(R.layout.fragment_favorites, container, false)
     }
 
-    override fun onCancelled(dbError: DatabaseError?) {
-        println("FavoritesFragment:onCancelled: ${dbError?.toException()}")
+    override fun onCancelled(dbError: DatabaseError) {
+        println("FavoritesFragment:onCancelled: ${dbError.toException()}")
     }
 
-    override fun onDataChange(data: DataSnapshot?) {
+    override fun onDataChange(data: DataSnapshot) {
 
-        data?.let {
-            for(child in it.children) {
-                var movie = child.getValue(Movie::class.java)
-                movies.add(movie!!)
-            }
-            recFavorites.layoutManager = LinearLayoutManager(activity)
-            fl_progress.visibility = FrameLayout.GONE
-            var movieResult = MovieResult(1, movies.size, 1, movies)
-            recFavorites.adapter = MovieResultAdapter(movieResult.results)
+        for(child in data.children) {
+            var movie = child.getValue(Movie::class.java)
+            movies.add(movie!!)
         }
+        recFavorites.layoutManager = LinearLayoutManager(activity)
+        fl_progress.visibility = FrameLayout.GONE
+        var movieResult = MovieResult(1, movies.size, 1, movies)
+        recFavorites.adapter = MovieResultAdapter(movieResult.results)
     }
 }

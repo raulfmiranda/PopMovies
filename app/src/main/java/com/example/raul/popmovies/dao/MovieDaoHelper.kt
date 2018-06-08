@@ -3,6 +3,8 @@ package com.example.raul.popmovies.dao
 import android.content.Context
 import com.example.raul.popmovies.async.DbWorkerThread
 import com.example.raul.popmovies.model.Movie
+import java.lang.reflect.Field
+import java.lang.reflect.Type
 
 class MovieDaoHelper(context: Context) {
 
@@ -24,6 +26,18 @@ class MovieDaoHelper(context: Context) {
     }
 
     fun insertMoviesInDb(movie: Movie) {
+        // TODO: Gambiarra? Fazer tratamento com reflection ou Room
+        if(movie.backdrop_path == null) {
+            movie.backdrop_path = ""
+        }
+        if(movie.poster_path == null) {
+            movie.poster_path = ""
+        }
+//        val fields = movie.javaClass.fields
+//        for(f in fields) {
+//            if(f.get(movie) == null) {
+//            }
+//        }
         val task = Runnable { mDb?.movieDao()?.insert(movie) }
         postTask(task)
     }
