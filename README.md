@@ -15,6 +15,7 @@
 ### Foi utilizado:
 
 ```
+* Model–view–presenter (MVP) architectural pattern (por enquanto, apenas no login e cadastro de usuário)
 * Firebase para login e persistência de dados.
 * SQLite + Room (ORM) para fazer cache local dos dados. 
 ```
