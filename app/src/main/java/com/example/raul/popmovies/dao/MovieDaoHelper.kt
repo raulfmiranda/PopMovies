@@ -21,6 +21,19 @@ class MovieDaoHelper(context: Context) {
         return mDb?.movieDao()?.getAll()
     }
 
+    fun getById(id: Int): Movie? {
+        return  mDb?.movieDao()?.getById(id)
+    }
+
+    fun getFavorites(): MutableList<Movie>? {
+        return mDb?.movieDao()?.getFavorites()
+    }
+
+    fun update(movie: Movie) {
+        val task = Runnable { mDb?.movieDao()?.update(movie) }
+        postTask(task)
+    }
+
     fun postTask(task: Runnable) {
         mDbWorkerThread?.postTask(task)
     }
@@ -46,6 +59,12 @@ class MovieDaoHelper(context: Context) {
         deleteAllDb()
         for(movie in movies) {
             insertMoviesInDb(movie)
+        }
+    }
+
+    fun updateFavorites(favMovies: MutableList<Movie>) {
+        for(favMovie in favMovies) {
+            update(favMovie)
         }
     }
 

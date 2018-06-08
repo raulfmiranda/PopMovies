@@ -8,9 +8,12 @@ import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.raul.popmovies.MainActivity
 import com.example.raul.popmovies.async.Firebase
 import com.example.raul.popmovies.R
+import com.example.raul.popmovies.dao.MovieDaoHelper
 import com.example.raul.popmovies.model.Movie
+import com.example.raul.popmovies.toast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -22,6 +25,7 @@ class DetailFragment : Fragment(), ValueEventListener {
 
     private var movie: Movie? = null
     private var firebase = Firebase(this@DetailFragment)
+    private var movieDaoHelper: MovieDaoHelper? = null
     private val uriBase = "https://image.tmdb.org/t/p/w780"
     //https://image.tmdb.org/t/p/w300/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg
 
@@ -33,7 +37,10 @@ class DetailFragment : Fragment(), ValueEventListener {
         super.onCreate(savedInstanceState)
         arguments?.let {
             movie = it.getSerializable(EXTRA_DETAIL) as Movie
-            activity?.findViewById<Toolbar>(R.id.toolbar_main)?.title = movie?.title
+            (activity as MainActivity)?.let {
+                it.findViewById<Toolbar>(R.id.toolbar_main)?.title = movie?.title
+                movieDaoHelper = it.movieDaoHelper
+            }
         }
     }
 
@@ -50,9 +57,9 @@ class DetailFragment : Fragment(), ValueEventListener {
             view.checkFavorite.setOnClickListener {
                 movie?.let {
                     if(checkFavorite.isChecked) {
-                        firebase.registerFavoriteMovie(it)
+                        registerFavoriteMovie(it)
                     } else {
-                        firebase.removeFavoriteMovie(it.id.toString())
+                        removeFavoriteMovie(it)
                     }
                 }
             }
@@ -71,23 +78,20 @@ class DetailFragment : Fragment(), ValueEventListener {
         return view
     }
 
-//    override fun onCancelled(dbError: DatabaseError?) {
-//        println("FavoritesFragment:onCancelled: ${dbError?.toException()}")
-//    }
-//
-//    override fun onDataChange(data: DataSnapshot?) {
-//        var movieIDs = mutableListOf<Int>()
-//        data?.let {
-//            for(child in it.children) {
-//                var m = child.getValue(Movie::class.java)
-//                movieIDs.add(m!!.id)
-//            }
-//        }
-//        checkFavorite.isChecked = movieIDs.contains(movie!!.id)
-//    }
+    fun registerFavoriteMovie(movie: Movie) {
+        movie.favorite = true
+        movieDaoHelper?.update(movie)
+        firebase.registerFavoriteMovie(movie)
+    }
+
+    fun removeFavoriteMovie(movie: Movie) {
+        movie.favorite = false
+        movieDaoHelper?.update(movie)
+        firebase.removeFavoriteMovie(movie.id.toString())
+    }
 
     override fun onCancelled(dbError: DatabaseError) {
-        println("FavoritesFragment:onCancelled: ${dbError.toException()}")
+        activity?.toast(dbError.toException().toString())
     }
 
     override fun onDataChange(data: DataSnapshot) {

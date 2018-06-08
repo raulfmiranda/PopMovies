@@ -22,4 +22,5 @@
     <string name="no">No</string>
     <string name="close_app">Close PopMovies App</string>
     <string name="close_app_ask">Do you want to close the app?</string>
+    <string name="no_favorites_movie">You do not have favorite movies</string>
 </resources>
